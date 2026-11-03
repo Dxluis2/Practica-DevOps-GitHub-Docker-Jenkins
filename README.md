@@ -1,75 +1,128 @@
-# React + TypeScript + Vite
+# Agenda Escolar — DevOps
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción del proyecto
 
-Currently, two official plugins are available:
+Agenda Escolar es una aplicación web progresiva (PWA) desarrollada para facilitar la organización de actividades académicas. Permite gestionar materias, tareas y fechas de entrega, ayudando a los estudiantes a mantener un mejor control de sus responsabilidades escolares.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Este proyecto es una continuación del sistema desarrollado durante el primer parcial. En esta etapa se incorporarán herramientas y prácticas DevOps para mejorar su implementación, automatización y distribución mediante contenedores Docker.
 
-## React Compiler
+## Objetivo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Implementar herramientas y procesos DevOps en la aplicación Agenda Escolar mediante la creación de contenedores, la integración de servicios y la automatización de procesos de construcción y verificación del software.
 
-## Expanding the ESLint configuration
+## Tecnologías utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React y TypeScript para el desarrollo de la interfaz.
+- Vite para el entorno de desarrollo y compilación.
+- Firebase Authentication y Firestore para autenticación y almacenamiento.
+- Progressive Web App (PWA) para instalación y funcionalidades web progresivas.
+- Git y GitHub para control de versiones.
+- Docker y Docker Compose para contenerización y ejecución de servicios.
+- GitHub Actions para integración continua.
+- Node.js y Redis para los servicios de la práctica.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Nota:** La integración de Docker, Redis y el flujo de integración continua forma parte de las siguientes etapas de desarrollo.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Requisitos
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Para ejecutar el proyecto en un entorno local se necesita:
 
+- Node.js y npm compatibles con las dependencias del proyecto.
+- Visual Studio Code o un editor de código.
+- Git.
+- Un navegador web actualizado.
+- Configuración válida del cliente Firebase.
+
+Para las etapas de contenerización también se utilizarán Docker Desktop y Docker Compose.
+
+## Instalación y ejecución local
+
+Clonar el repositorio:
+
+```bash
+git clone https://github.com/Dxluis2/agendaEscolar-devops.git
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Ingresar a la carpeta:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+cd agendaEscolar-devops
 ```
+
+Instalar las dependencias:
+
+```bash
+npm install
+```
+
+Configurar las variables de entorno de Firebase en un archivo `.env.local`, utilizando los valores correspondientes al proyecto. No se deben publicar credenciales privadas.
+
+Iniciar la aplicación:
+
+```bash
+npm run dev
+```
+
+Abrir en el navegador la dirección local que indique Vite, normalmente:
+
+http://localhost:5173/
+
+## Compilación
+
+Para generar la versión de producción:
+
+```bash
+npm run build
+```
+
+Para previsualizar la compilación:
+
+```bash
+npm run preview
+```
+
+Para ejecutar el análisis estático:
+
+```bash
+npm run lint
+```
+
+En Windows PowerShell puede utilizarse `npm.cmd` en lugar de `npm` si existe una restricción de ejecución de scripts.
+
+## Estructura del proyecto
+
+```text
+agendaEscolar-devops/
+├── public/
+├── scripts/
+├── src/
+│   ├── assets/
+│   ├── pages/
+│   ├── App.tsx
+│   ├── firebase.ts
+│   ├── main.tsx
+│   └── sw.ts
+├── .github/
+│   └── workflows/
+├── package.json
+├── package-lock.json
+├── README.md
+└── vite.config.ts
+```
+
+Durante la práctica se agregarán los archivos necesarios para Docker, Docker Compose, pruebas automatizadas y CI.
+
+## Integrantes del equipo
+
+- Navarrete Sanchez Luis Angel
+- Perez Lozano Erick David
+- Ramirez Arellano Jose Luis
+- Vargas Gonzalez Luis Gabriel
+
+## Repositorio
+
+https://github.com/Dxluis2/agendaEscolar-devops
+
+## Estado del proyecto
+
+La aplicación web se encuentra implementada y su compilación de producción ha sido verificada. La configuración de contenedores, los servicios complementarios y la integración continua se desarrollarán durante la práctica integradora de DevOps.
