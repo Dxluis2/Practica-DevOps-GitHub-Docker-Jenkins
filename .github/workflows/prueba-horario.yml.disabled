@@ -1,0 +1,16 @@
+name: Prueba de horario automatico
+
+on:
+  schedule:
+    - cron: '11,26,41,56 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prueba:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirmar ejecucion
+        run: echo "GitHub ejecuto el horario automaticamente"
