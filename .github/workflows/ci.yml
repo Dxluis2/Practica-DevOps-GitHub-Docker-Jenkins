@@ -1,4 +1,5 @@
 
+
 name: CI/CD Agenda Escolar DevOps
 
 on:
@@ -33,6 +34,12 @@ jobs:
 
       - name: Construir imagen Docker
         run: docker build -t control-visitas:ci .
+
+      - name: Verificar imagen Docker
+        run: docker image inspect control-visitas:ci
+
+      - name: Confirmar integracion continua
+        run: echo "Pruebas y construccion Docker completadas correctamente"
 
       - name: Iniciar sesion en Docker Hub
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
