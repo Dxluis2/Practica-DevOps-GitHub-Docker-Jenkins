@@ -1,5 +1,4 @@
 
-
 name: CI/CD Agenda Escolar DevOps
 
 on:
@@ -40,18 +39,3 @@ jobs:
 
       - name: Confirmar integracion continua
         run: echo "Pruebas y construccion Docker completadas correctamente"
-
-      - name: Iniciar sesion en Docker Hub
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Publicar imagen Docker
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          tags: luis2005ram/control-visitas:latest
