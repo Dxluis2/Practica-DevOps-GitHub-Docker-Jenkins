@@ -1,116 +1,147 @@
-# Agenda Escolar — DevOps
+
+# Práctica DevOps: GitHub, Docker y Jenkins
 
 ## Descripción del proyecto
 
-Agenda Escolar es una aplicación web progresiva (PWA) desarrollada para facilitar la organización de actividades académicas. Permite gestionar materias, tareas y fechas de entrega, ayudando a los estudiantes a mantener un mejor control de sus responsabilidades escolares.
+Agenda Escolar es una aplicación web progresiva (PWA) desarrollada con React, TypeScript y Firebase para facilitar la organización de actividades académicas.
 
-Este proyecto es una continuación del sistema desarrollado durante el primer parcial. En esta etapa se incorporarán herramientas y prácticas DevOps para mejorar su implementación, automatización y distribución mediante contenedores Docker.
+Permite administrar materias, tareas y fechas de entrega, ayudando a los estudiantes a organizar sus responsabilidades escolares.
 
-## Objetivo
+Este proyecto se utiliza para implementar un pipeline DevOps mediante GitHub, Docker y Jenkins, automatizando las pruebas, la construcción de imágenes y la ejecución de contenedores.
 
-Implementar herramientas y procesos DevOps en la aplicación Agenda Escolar mediante la creación de contenedores, la integración de servicios y la automatización de procesos de construcción y verificación del software.
+## Objetivo general
+
+Integrar GitHub, Docker y Jenkins para implementar un flujo de integración continua que permita administrar el código fuente, realizar pruebas automatizadas, construir imágenes Docker y verificar el funcionamiento de la aplicación.
 
 ## Tecnologías utilizadas
 
-- React y TypeScript para el desarrollo de la interfaz.
-- Vite para el entorno de desarrollo y compilación.
-- Firebase Authentication y Firestore para autenticación y almacenamiento.
-- Progressive Web App (PWA) para instalación y funcionalidades web progresivas.
-- Git y GitHub para control de versiones.
-- Docker y Docker Compose para contenerización y ejecución de servicios.
-- GitHub Actions para integración continua.
-- Node.js y Redis para los servicios de la práctica.
-
-**Nota:** La integración de Docker, Redis y el flujo de integración continua forma parte de las siguientes etapas de desarrollo.
+- React y TypeScript
+- Vite
+- Firebase Authentication y Firestore
+- Progressive Web App (PWA)
+- Node.js y Express
+- Redis
+- Git y GitHub
+- Docker y Docker Compose
+- GitHub Actions
+- Jenkins (integración pendiente)
 
 ## Requisitos
 
-Para ejecutar el proyecto en un entorno local se necesita:
+- Git
+- Node.js y npm
+- Docker Desktop
+- Docker Compose
+- Jenkins
+- Navegador web
+- Configuración de Firebase para utilizar la interfaz web
 
-- Node.js y npm compatibles con las dependencias del proyecto.
-- Visual Studio Code o un editor de código.
-- Git.
-- Un navegador web actualizado.
-- Configuración válida del cliente Firebase.
-
-Para las etapas de contenerización también se utilizarán Docker Desktop y Docker Compose.
-
-## Instalación y ejecución local
+## Instalación del proyecto
 
 Clonar el repositorio:
 
 ```bash
-git clone https://github.com/Dxluis2/agendaEscolar-devops.git
+git clone https://github.com/Dxluis2/Practica-DevOps-GitHub-Docker-Jenkins.git
 ```
 
-Ingresar a la carpeta:
+Entrar al directorio:
 
 ```bash
-cd agendaEscolar-devops
+cd Practica-DevOps-GitHub-Docker-Jenkins
 ```
 
-Instalar las dependencias:
+Instalar dependencias:
 
 ```bash
-npm install
+npm ci
 ```
 
-Configurar las variables de entorno de Firebase en un archivo `.env.local`, utilizando los valores correspondientes al proyecto. No se deben publicar credenciales privadas.
+## Ejecutar la aplicación web
 
-Iniciar la aplicación:
+Configurar las variables de entorno necesarias para Firebase.
 
 ```bash
 npm run dev
 ```
 
-Abrir en el navegador la dirección local que indique Vite, normalmente:
+Abrir la dirección indicada por Vite, normalmente:
 
 http://localhost:5173/
 
-## Compilación
-
-Para generar la versión de producción:
+## Ejecutar pruebas
 
 ```bash
-npm run build
+npm test
 ```
 
-Para previsualizar la compilación:
+Las pruebas actuales verifican aspectos básicos de la configuración de la API.
+
+## Construcción de la imagen Docker
 
 ```bash
-npm run preview
+docker build -t control-visitas:v1 .
 ```
 
-Para ejecutar el análisis estático:
+## Ejecutar los servicios con Docker Compose
 
 ```bash
-npm run lint
+docker compose up -d --build
 ```
 
-En Windows PowerShell puede utilizarse `npm.cmd` en lugar de `npm` si existe una restricción de ejecución de scripts.
+Comprobar los contenedores:
 
-## Estructura del proyecto
+```bash
+docker compose ps
+```
+
+Verificar la API:
+
+http://localhost:3000/health
+
+Consultar el contador de visitas:
+
+http://localhost:3000/api/visitas
+
+Detener los servicios:
+
+```bash
+docker compose down
+```
+
+## Integración continua
+
+El proyecto cuenta con un flujo previo de GitHub Actions que ejecuta pruebas, construye una imagen Docker y la publica en Docker Hub.
+
+Para esta práctica se incorporará Jenkins mediante un archivo `Jenkinsfile`, con etapas para:
+
+1. Obtener el código fuente desde GitHub.
+2. Instalar las dependencias.
+3. Ejecutar pruebas automatizadas.
+4. Construir la imagen Docker.
+5. Ejecutar un contenedor.
+6. Verificar el funcionamiento de la API.
+
+## Estructura principal
 
 ```text
-agendaEscolar-devops/
-├── public/
-├── scripts/
-├── src/
-│   ├── assets/
-│   ├── pages/
-│   ├── App.tsx
-│   ├── firebase.ts
-│   ├── main.tsx
-│   └── sw.ts
-├── .github/
-│   └── workflows/
-├── package.json
-├── package-lock.json
-├── README.md
-└── vite.config.ts
+Practica-DevOps-GitHub-Docker-Jenkins/
+|-- .github/
+|   |-- workflows/
+|       |-- ci.yml
+|-- api/
+|   |-- server.js
+|-- public/
+|-- src/
+|-- test/
+|   |-- app.test.js
+|-- .dockerignore
+|-- Dockerfile
+|-- compose.yaml
+|-- package.json
+|-- package-lock.json
+|-- README.md
+|-- Jenkinsfile 
 ```
-
-Durante la práctica se agregarán los archivos necesarios para Docker, Docker Compose, pruebas automatizadas y CI.
 
 ## Integrantes del equipo
 
@@ -119,10 +150,12 @@ Durante la práctica se agregarán los archivos necesarios para Docker, Docker C
 - Ramirez Arellano Jose Luis
 - Vargas Gonzalez Luis Gabriel
 
-## Repositorio
+## Repositorio de GitHub
 
-https://github.com/Dxluis2/agendaEscolar-devops
+https://github.com/Dxluis2/Practica-DevOps-GitHub-Docker-Jenkins
 
 ## Estado del proyecto
 
-La aplicación web se encuentra implementada y su compilación de producción ha sido verificada. La configuración de contenedores, los servicios complementarios y la integración continua se desarrollarán durante la práctica integradora de DevOps.
+La aplicación, la API, las pruebas automatizadas y la configuración Docker ya se encuentran implementadas.
+
+La integración con Jenkins y la ejecución del nuevo pipeline se realizarán durante las siguientes fases de la práctica.
